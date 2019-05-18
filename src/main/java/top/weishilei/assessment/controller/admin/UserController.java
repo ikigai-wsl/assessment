@@ -71,6 +71,12 @@ public class UserController extends BaseController {
         if (isExist && user.getUser().equals(userService.selectByUser(userStr).getName())) {
             return Result.failCode("用户名已存在！", Result.USER_IS_EXIST);
         }
+        if (user.getRole() == 1) {
+            Integer pid = getLoginUser().getId();
+            user.setPid(pid);
+        } else {
+            user.setPid(null);
+        }
 
         return userService.update(user) > 0 ? Result.success() : Result.fail("修改失败！");
     }
@@ -106,6 +112,10 @@ public class UserController extends BaseController {
         boolean isExist = userService.selectByUser(userStr) != null;
         if (isExist) {
             return Result.failCode("用户名已存在！", Result.USER_IS_EXIST);
+        }
+        if (user.getRole() == 1) {
+            Integer pid = getLoginUser().getId();
+            user.setPid(pid);
         }
 
         return userService.insert(user) > 0 ? Result.success() : Result.fail("添加失败！");

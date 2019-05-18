@@ -123,5 +123,34 @@ $("#editUser").click(function () {
             window.parent.location.reload();
         }
     })
+})
 
+$("#addGroup").click(function () {
+    var c = $('input:checkbox:checked');
+    var id = $('#id').val();
+    var ids = '';
+    for (var i = 0; i < c.length; i++) {
+        ids += c.eq(i).val() + ',';
+    }
+
+    if (isEmpty(ids) || isEmpty(id)) {
+        Notify('请正确选择！', 'top-right', '5000', 'danger', 'fa-bolt', true);
+        return;
+    }
+
+    $.ajax({
+        url : '/admin/group/addGroup',
+        data : {'id' : id, 'ids' : ids},
+        dataType : 'JSON',
+        success : function (response) {
+            var code = response['code'];
+            if (code != 0) {
+                var message = response['message'];
+                Notify(message, 'top-right', '5000', 'danger', 'fa-bolt', true);
+                return;
+            }
+
+            window.parent.location.reload();
+        }
+    })
 })

@@ -22,3 +22,12 @@ function user(id) {
         content: '/admin/user?id=' + id
     });
 }
+
+function addGroup(id, name) {
+    layer.open({
+        title: '添加小组成员',
+        area: ['500px', '560px'],
+        type: 2,
+        content: '/admin/group/add?id=' + id + "&name=" + name
+    });
+}

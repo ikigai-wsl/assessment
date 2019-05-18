@@ -19,6 +19,18 @@
         from user
     </select>
 
+    <select id="selectByRole" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumnList"></include>
+        from user where role = #{role}
+    </select>
+
+    <select id="selectPidIsNull" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumnList"></include>
+        from user where pid is null
+    </select>
+
     <select id="selectById" resultMap="BaseResultMap" parameterType="Integer">
         select
         <include refid="BaseColumnList"></include>
@@ -47,7 +59,7 @@
 
     <update id="update" parameterType="User">
         update user set
-        user = #{user}, pass = #{pass}, name = #{name}, role = #{role}
+        user = #{user}, pass = #{pass}, name = #{name}, role = #{role}, pid = #{pid}
         where id = #{id}
     </update>
 
@@ -57,6 +69,11 @@
         where id = #{id}
     </update>
 
+    <update id="updatePid">
+        update user set
+        pid = #{pid}
+        where id = #{id}
+    </update>
 
     <delete id="delete" parameterType="Integer">
         delete from user where id = #{id}

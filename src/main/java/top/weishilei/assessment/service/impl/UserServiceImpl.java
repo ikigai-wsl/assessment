@@ -114,6 +114,29 @@ public class UserServiceImpl implements UserService {
         return userMapper.updatePass(id, pass);
     }
 
+    @Override
+    public List<User> selectPidIsNull() {
+        return userMapper.selectPidIsNull();
+    }
+
+    @Override
+    public List<User> selectByRole(Integer role) {
+        if (null == role) {
+            return null;
+        }
+
+        return userMapper.selectByRole(role);
+    }
+
+    @Override
+    public Integer updatePid(Integer id, Integer pid) {
+        if (null == id || null == pid) {
+            return 0;
+        }
+
+        return userMapper.updatePid(id, pid);
+    }
+
     /**
      * 组装UserVo
      * @param user

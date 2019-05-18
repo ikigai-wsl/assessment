@@ -7,7 +7,19 @@
     <link href="/static/css/beyond.min.css" rel="stylesheet" />
 </head>
 <body>
-<#include 'nav.ftl' />
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/admin/index">用户管理</a></li>
+                <li><a href="/admin/group">小组管理</a></li>
+                <li><a href="#">绩效管理</a></li>
+                <li><a href="javascript:if (confirm('确定登出？')) {window.location.href = '/admin/user/logout'}">${loginUser['name']}：登出</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <div class="main-container container-fluid">
     <div class="page-container">
         <div class="page-content">
@@ -16,11 +28,11 @@
                     <div class="col-xs-12 col-md-12">
                         <div class="widget">
                             <div class="widget-header ">
-                                <span class="widget-caption">绩效考核管理页</span>
+                                <span class="widget-caption">用户管理页</span>
                             </div>
                             <div class="widget-body">
                                 <div class="table-toolbar">
-                                    <#if loginUser['role'] != 2>
+                                    <#if loginUser['role'] == 0>
                                         <a id="editabledatatable_new" onclick="user_commont(-1)" class="btn btn-default">
                                             新增用户
                                         </a>

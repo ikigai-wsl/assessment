@@ -67,4 +67,25 @@ public interface UserMapper {
      * @return
      */
     Integer updatePass(@Param("id") Integer id, @Param("pass") String pass);
+
+    /**
+     * 查询pid为null
+     * @return
+     */
+    List<User> selectPidIsNull();
+
+    /**
+     * 根据权限查询
+     * @param role
+     * @return
+     */
+    List<User> selectByRole(Integer role);
+
+    /**
+     * 修改pid
+     * @param id
+     * @param pid
+     * @return
+     */
+    Integer updatePid(@Param("id") Integer id, @Param("pid") Integer pid);
 }
