@@ -1,6 +1,7 @@
 package top.weishilei.assessment.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import top.weishilei.assessment.domain.User;
 
 import java.util.List;
@@ -58,4 +59,12 @@ public interface UserMapper {
      * @return
      */
     Integer delete(Integer id);
+
+    /**
+     * 修改用户密码
+     * @param id
+     * @param pass
+     * @return
+     */
+    Integer updatePass(@Param("id") Integer id, @Param("pass") String pass);
 }

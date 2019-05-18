@@ -47,9 +47,16 @@
 
     <update id="update" parameterType="User">
         update user set
-        user = #{user}, pass = #{pass}, name = #{name}, role = #{role}, pid = #{pid}
+        user = #{user}, pass = #{pass}, name = #{name}, role = #{role}
         where id = #{id}
     </update>
+
+    <update id="updatePass">
+        update user set
+        pass = #{pass}
+        where id = #{id}
+    </update>
+
 
     <delete id="delete" parameterType="Integer">
         delete from user where id = #{id}

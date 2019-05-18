@@ -1,20 +1,15 @@
-package top.weishilei.assessment.domain;
-
-import java.util.Date;
+package top.weishilei.assessment.vo;
 
 /**
- * 用户domain
  * @author: weishilei
  */
-public class User {
+public class UserVo {
     private Integer id;
     private String user;
     private String pass;
     private String name;
-    // 0：管理员，1：组长，2：员工
-    private Integer role;
-    private Integer pid;
-    private Date createTime;
+    private String role;
+    private String pName;
 
     public Integer getId() {
         return id;
@@ -48,40 +43,31 @@ public class User {
         this.name = name;
     }
 
-    public Integer getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Integer role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    public Integer getPid() {
-        return pid;
+    public String getpName() {
+        return pName;
     }
 
-    public void setPid(Integer pid) {
-        this.pid = pid;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setpName(String pName) {
+        this.pName = pName;
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserVo{" +
                 "id=" + id +
                 ", user='" + user + '\'' +
                 ", pass='" + pass + '\'' +
                 ", name='" + name + '\'' +
-                ", role=" + role +
-                ", pid=" + pid +
-                ", createTime=" + createTime +
+                ", role='" + role + '\'' +
+                ", pName='" + pName + '\'' +
                 '}';
     }
 }

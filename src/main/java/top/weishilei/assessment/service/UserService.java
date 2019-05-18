@@ -1,6 +1,7 @@
 package top.weishilei.assessment.service;
 
 import top.weishilei.assessment.domain.User;
+import top.weishilei.assessment.vo.UserVo;
 
 import java.util.List;
 
@@ -21,6 +22,14 @@ public interface UserService {
      * @return
      */
     User selectById(Integer id);
+
+
+    /**
+     * 根据id查询Vo
+     * @param id
+     * @return
+     */
+    UserVo selectByIdAndVo(Integer id);
 
     /**
      * 根据pid查询
@@ -56,4 +65,12 @@ public interface UserService {
      * @return
      */
     Integer delete(Integer id);
+
+    /**
+     * 修改密码
+     * @param id
+     * @param pass
+     * @return
+     */
+    Integer updatePass(Integer id, String pass);
 }

@@ -2,6 +2,7 @@ package top.weishilei.assessment.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import top.weishilei.assessment.domain.User;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -34,5 +35,9 @@ public class BaseController {
 
     public HttpServletResponse getResponse() {
         return response;
+    }
+
+    public User getLoginUser() {
+        return (User)session.getAttribute("loginUser");
     }
 }

@@ -10,6 +10,9 @@ public class Result {
     public static final int SUCCESS = 0;
     public static final int FAIL = 10000;
     public static final int USER_OR_PASS_IS_FAIL = 20000;
+    public static final int USER_IS_EXIST = 20001;
+    public static final int PARAM_IS_EMPTY = 30000;
+    public static final int PARAM_IS_FAIL = 30001;
 
     private String message;
     private int code;

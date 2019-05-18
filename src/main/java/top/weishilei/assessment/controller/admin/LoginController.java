@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import top.weishilei.assessment.controller.BaseController;
 import top.weishilei.assessment.domain.Result;
 import top.weishilei.assessment.domain.User;
-import top.weishilei.assessment.interceptor.AdminInterceptor;
+import top.weishilei.assessment.service.UserService;
 import top.weishilei.assessment.service.impl.UserServiceImpl;
 
 /**
@@ -20,15 +20,11 @@ import top.weishilei.assessment.service.impl.UserServiceImpl;
 @Controller
 public class LoginController extends BaseController {
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @GetMapping("/login")
     public ModelAndView showLogin() {
-        if (getSession().getAttribute(AdminInterceptor.LOGIN_USER) == null) {
-            return new ModelAndView("login");
-        }
-
-        return new ModelAndView("/admin/index");
+        return new ModelAndView("login");
     }
 
     @ResponseBody

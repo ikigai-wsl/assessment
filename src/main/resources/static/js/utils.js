@@ -6,22 +6,6 @@ function isEmpty(str) {
     return false;
 }
 
-function alertMsg(text) {
-    var type = 'auto';
-    layer.open({
-        type: 1,
-        offset: type,
-        id: 'layerDemo' + type,
-        content: '<div style="padding: 20px 100px;">'+ text +'</div>',
-        btn: '关闭全部',
-        btnAlign: 'c',
-        shade: 0,
-        yes: function(){
-            layer.closeAll();
-        }
-    });
-}
-
 function getNowTime() {
     var now = new Date();
     var year = now.getFullYear();       //年
