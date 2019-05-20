@@ -35,7 +35,7 @@ function addGroup(id, name) {
 function addKpi(id, name) {
     layer.open({
         title: '添加绩效',
-        area: ['500px', '700px'],
+        area: ['500px', '750px'],
         type: 2,
         content: '/admin/kpi/add?id=' + id + "&name=" + name
     });

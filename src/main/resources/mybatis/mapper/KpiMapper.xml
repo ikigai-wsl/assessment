@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.weishilei.assessment.mapper.KpiMapper">
+    <resultMap id="BaseResultMap" type="Kpi">
+        <id column="id" property="id" jdbcType="INTEGER" javaType="INTEGER" />
+        <result column="score_note" property="scoreNote" />
+        <result column="completion_note" property="completionNote" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="Date" />
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id, pid, overview, completion,
+        completion_note, score, score_note,
+        create_time
+    </sql>
+
+    <insert id="insert" parameterType="Kpi">
+        insert into
+        kpi
+        (id, pid, overview, completion, completion_note, score, score_note, create_time)
+        values
+        (#{id}, #{pid}, #{overview}, #{completion}, #{completionNote}, #{score}, #{scoreNote}, #{createTime})
+    </insert>
+
+    <update id="update" parameterType="Kpi">
+        update kpi set
+        overview = #{overview}, completion = #{completion}, completion_note = #{completionNote},
+        score = #{score}, score_note = #{scoreNote}, create_time = #{createTime}
+        where id = #{id}
+    </update>
+
+    <select id="selectByPid" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumnList"></include>
+         from kpi where pid = #{id}
+    </select>
+
+    <select id="selectByMonthDayAndPid" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumnList"></include>
+        from kpi where pid = #{id} and concat(year(create_time), month(create_time), day(create_time)) = #{date}
+    </select>
+</mapper>

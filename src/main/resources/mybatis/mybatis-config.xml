@@ -11,5 +11,6 @@
         <typeAlias alias="List" type="java.util.List" />
         <typeAlias alias="Date" type="java.util.Date" />
         <typeAlias alias="User" type="top.weishilei.assessment.domain.User" />
+        <typeAlias alias="Kpi" type="top.weishilei.assessment.domain.Kpi" />
     </typeAliases>
 </configuration>

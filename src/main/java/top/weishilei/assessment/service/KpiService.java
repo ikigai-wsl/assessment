@@ -1,17 +1,14 @@
-package top.weishilei.assessment.mapper;
+package top.weishilei.assessment.service;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import top.weishilei.assessment.domain.Kpi;
 
 import java.util.List;
 
 /**
- * 绩效Mapper
+ * 绩效Service
  * @author weishilei
  */
-@Mapper
-public interface KpiMapper {
+public interface KpiService {
     /**
      * 新增
      * @param kpi
@@ -39,5 +36,6 @@ public interface KpiMapper {
      * @param id
      * @return
      */
-    Kpi selectByMonthDayAndPid(@Param("date") String date, @Param("id") Integer id);
+    Kpi selectByMonthDayAndPid(String date, Integer id);
+
 }

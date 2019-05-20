@@ -16,7 +16,7 @@ public class Kpi {
     // 完成备注
     private String completionNote;
     // 完成质量分数
-    private Integer score;
+    private Double score;
     // 完成质量备注
     private String scoreNote;
     private Date createTime;
@@ -61,11 +61,11 @@ public class Kpi {
         this.completionNote = completionNote;
     }
 
-    public Integer getScore() {
+    public Double getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(Double score) {
         this.score = score;
     }
 
