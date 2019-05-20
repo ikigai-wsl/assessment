@@ -137,6 +137,17 @@ public class UserServiceImpl implements UserService {
         return userMapper.updatePid(id, pid);
     }
 
+    @Override
+    public Map<String, List<User>> selectLearderAndStaff(List<User> userList) {
+        Map<String, List<User>> userMap = new HashMap<>();
+        for (User user : userList) {
+            List<User> list = selectByPid(user.getId());
+            userMap.put(Integer.toString(user.getId()), list);
+        }
+
+        return userMap;
+    }
+
     /**
      * 组装UserVo
      * @param user

@@ -73,7 +73,6 @@
                                         </div>
                                     </#list>
                                 </div>
-
                             </div>
                         </div>
                     </div>

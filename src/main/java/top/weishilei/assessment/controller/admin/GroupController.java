@@ -29,11 +29,7 @@ public class GroupController {
     public ModelAndView showGroup() {
         ModelAndView modelAndView = new ModelAndView("admin/group");
         List<User> userList = userService.selectByRole(1);
-        Map<String, List<User>> userMap = new HashMap<>();
-        for (User user : userList) {
-            List<User> list = userService.selectByPid(user.getId());
-            userMap.put(Integer.toString(user.getId()), list);
-        }
+        Map<String, List<User>> userMap = userService.selectLearderAndStaff(userList);
         modelAndView.addObject("userMap", userMap);
         modelAndView.addObject("userList", userList);
         modelAndView.addObject("active", 2);
@@ -43,7 +39,7 @@ public class GroupController {
 
     @GetMapping("/add")
     public ModelAndView showAddGroup(Integer id, String name) {
-        ModelAndView modelAndView = new ModelAndView(("admin/addGroup"));
+        ModelAndView modelAndView = new ModelAndView(("admin/group/addGroup"));
         List<User> userList = userService.selectPidIsNull();
         modelAndView.addObject("userList", userList);
         modelAndView.addObject("id", id);

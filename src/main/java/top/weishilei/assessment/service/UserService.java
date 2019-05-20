@@ -4,6 +4,7 @@ import top.weishilei.assessment.domain.User;
 import top.weishilei.assessment.vo.UserVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户Service
@@ -95,4 +96,10 @@ public interface UserService {
      */
     Integer updatePid(Integer id, Integer pid);
 
+    /**
+     * 查询组长和员工
+     * @param userList
+     * @return
+     */
+    Map<String, List<User>> selectLearderAndStaff(List<User> userList);
 }

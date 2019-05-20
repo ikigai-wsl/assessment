@@ -31,3 +31,12 @@ function addGroup(id, name) {
         content: '/admin/group/add?id=' + id + "&name=" + name
     });
 }
+
+function addKpi(id, name) {
+    layer.open({
+        title: '添加绩效',
+        area: ['500px', '700px'],
+        type: 2,
+        content: '/admin/kpi/add?id=' + id + "&name=" + name
+    });
+}

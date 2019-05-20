@@ -36,7 +36,7 @@ public class UserController extends BaseController {
             return new ModelAndView("redirect:/");
         }
 
-        ModelAndView modelAndView = new ModelAndView("admin/user");
+        ModelAndView modelAndView = new ModelAndView("admin/user/user");
         modelAndView.addObject("userVo", userVo);
 
         return modelAndView;
@@ -49,7 +49,7 @@ public class UserController extends BaseController {
         }
 
         User user = userService.selectById(id);
-        ModelAndView modelAndView = new ModelAndView("admin/update");
+        ModelAndView modelAndView = new ModelAndView("admin/user/update");
         modelAndView.addObject("userUpdate", user);
         Integer role = getLoginUser().getRole();
         if (role == 0) {
@@ -104,7 +104,7 @@ public class UserController extends BaseController {
 
     @GetMapping("/register")
     public ModelAndView showRegister() {
-        ModelAndView modelAndView = new ModelAndView("admin/register");
+        ModelAndView modelAndView = new ModelAndView("admin/user/register");
         modelAndView.addObject("userList", userService.select());
 
         return modelAndView;
