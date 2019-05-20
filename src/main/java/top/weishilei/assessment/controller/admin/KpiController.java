@@ -105,6 +105,13 @@ public class KpiController extends BaseController {
         return Result.success(kpi);
     }
 
+    @GetMapping("/view")
+    public ModelAndView viewKpi() {
+        ModelAndView modelAndView = new ModelAndView("admin/kpi/viewKpi");
+
+        return modelAndView;
+    }
+
     private boolean verifyIsRight(Kpi kpi) {
         String overview = kpi.getOverview();
         String completionNote = kpi.getCompletionNote();
