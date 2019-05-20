@@ -130,7 +130,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer updatePid(Integer id, Integer pid) {
-        if (null == id || null == pid) {
+        if (null == id) {
             return 0;
         }
 

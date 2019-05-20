@@ -1,26 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>后台首页</title>
+    <title>小组管理</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/static/css/beyond.min.css" rel="stylesheet"/>
 </head>
 <body>
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="example-navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/admin/index">用户管理</a></li>
-                <li class="active"><a href="/admin/group">小组管理</a></li>
-                <li><a href="#">绩效管理</a></li>
-                <li>
-                    <a href="javascript:if (confirm('确定登出？')) {window.location.href = '/admin/user/logout'}">${loginUser['name']}
-                        ：登出</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+
+<#include "nav.ftl">
+
 <div class="main-container container-fluid">
     <div class="page-container">
         <div class="page-content">
@@ -33,13 +22,14 @@
                             </div>
                             <div class="widget-body">
                                 <div class="row">
-                                    <#list userMap?keys as user>
-                                        <div class="col-xs-12 col-md-6">
+                                    <#list userList as user>
+                                        <div class="col-md-12">
                                             <div class="well with-header with-footer">
                                                 <div class="header bg-palegreen">
                                                     ${user['name']} 的小组
                                                 </div>
-                                                <a class="btn btn-default" style="margin-bottom: 10px;" onclick="addGroup(${user['id']}, '${user['name']}')">
+                                                <a class="btn btn-default" style="margin-bottom: 10px;"
+                                                   onclick="addGroup(${user['id']}, '${user['name']}')">
                                                     添加小组成员
                                                 </a>
                                                 <table class="table table-bordered table-hover">
@@ -59,20 +49,31 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
+                                                    <#list userMap[user['id']?string] as u>
                                                         <tr>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
                                                             <td>
-                                                                <a href="javascript:if (confirm('确定将此用户移除小组？')) {}" class="btn btn-danger btn-xs delete"><i class="fa fa-trash-o"></i>移除小组</a>
+                                                                ${u['user']}
+                                                            </td>
+                                                            <td>
+                                                                ${u['name']}
+                                                            </td>
+                                                            <td>
+                                                                ${u['createTime']?string('yyyy.MM.dd HH:mm')}
+                                                            </td>
+                                                            <td>
+                                                                <a href="javascript:if (confirm('确定将此用户移除小组？')) {window.location.href = '/admin/group/removeGroup?id=${u['id']}'}" class="btn btn-danger btn-xs delete">
+                                                                    <i class="fa fa-trash-o"></i>移除小组
+                                                                </a>
                                                             </td>
                                                         </tr>
+                                                    </#list>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
                                     </#list>
                                 </div>
+
                             </div>
                         </div>
                     </div>

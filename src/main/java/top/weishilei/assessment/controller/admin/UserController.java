@@ -14,6 +14,8 @@ import top.weishilei.assessment.domain.User;
 import top.weishilei.assessment.service.UserService;
 import top.weishilei.assessment.vo.UserVo;
 
+import java.util.List;
+
 /**
  * 用户Controller
  * @author: weishilei
@@ -67,15 +69,23 @@ public class UserController extends BaseController {
         }
 
         String userStr = user.getUser();
+        User temp = userService.selectById(user.getId());
         boolean isExist = userService.selectByUser(userStr) != null;
-        if (isExist && user.getUser().equals(userService.selectByUser(userStr).getName())) {
+        if (isExist && !temp.getUser().equals(userStr)) {
             return Result.failCode("用户名已存在！", Result.USER_IS_EXIST);
         }
-        if (user.getRole() == 1) {
-            Integer pid = getLoginUser().getId();
-            user.setPid(pid);
-        } else {
-            user.setPid(null);
+
+        //如果修改了用户权限
+        if (temp.getRole() != user.getRole()) {
+            if (user.getRole() == 1) {
+                user.setPid(getLoginUser().getId());
+            } else { //如果把组长设置成了员工，清空组下成员
+                user.setPid(null);
+                List<User> userList = userService.selectByPid(user.getId());
+                for (User u : userList) {
+                    userService.updatePid(u.getId(), null);
+                }
+            }
         }
 
         return userService.update(user) > 0 ? Result.success() : Result.fail("修改失败！");

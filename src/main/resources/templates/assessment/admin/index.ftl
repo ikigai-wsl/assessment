@@ -1,24 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>后台首页</title>
+    <title>用户管理</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/static/css/beyond.min.css" rel="stylesheet" />
 </head>
 <body>
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="example-navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/admin/index">用户管理</a></li>
-                <li><a href="/admin/group">小组管理</a></li>
-                <li><a href="#">绩效管理</a></li>
-                <li><a href="javascript:if (confirm('确定登出？')) {window.location.href = '/admin/user/logout'}">${loginUser['name']}：登出</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+
+<#include "nav.ftl">
 
 <div class="main-container container-fluid">
     <div class="page-container">

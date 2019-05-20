@@ -33,6 +33,7 @@ public class AdminController extends BaseController {
             userList = userService.selectByPid(id);
         }
         modelAndView.addObject("userList", userList);
+        modelAndView.addObject("active", 1);
 
         return modelAndView;
     }

@@ -29,12 +29,14 @@ public class GroupController {
     public ModelAndView showGroup() {
         ModelAndView modelAndView = new ModelAndView("admin/group");
         List<User> userList = userService.selectByRole(1);
-        Map<User, List<User>> userMap = new HashMap<>();
+        Map<String, List<User>> userMap = new HashMap<>();
         for (User user : userList) {
             List<User> list = userService.selectByPid(user.getId());
-            userMap.put(user, list);
+            userMap.put(Integer.toString(user.getId()), list);
         }
         modelAndView.addObject("userMap", userMap);
+        modelAndView.addObject("userList", userList);
+        modelAndView.addObject("active", 2);
 
         return modelAndView;
     }
@@ -68,5 +70,15 @@ public class GroupController {
         }
 
         return Result.success();
+    }
+
+    @GetMapping("/removeGroup")
+    public ModelAndView removeGroup(Integer id) {
+        if (null == id) {
+            return new ModelAndView("redirect:/admin/group");
+        }
+        userService.updatePid(id, null);
+
+        return new ModelAndView("redirect:/admin/group");
     }
 }
