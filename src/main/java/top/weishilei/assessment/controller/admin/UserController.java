@@ -140,7 +140,13 @@ public class UserController extends BaseController {
 
     @GetMapping("/delete")
     public ModelAndView delte(Integer id) {
-        userService.delete(id);
+        boolean isSuccess = userService.delete(id) > 0;
+        if (isSuccess) {
+            List<User> userList = userService.selectByPid(id);
+            for (User user : userList) {
+                userService.updatePid(user.getId(), null);
+            }
+        }
 
         return new ModelAndView("redirect:/");
     }

@@ -27,7 +27,7 @@
     <update id="update" parameterType="Kpi">
         update kpi set
         overview = #{overview}, completion = #{completion}, completion_note = #{completionNote},
-        score = #{score}, score_note = #{scoreNote}, create_time = #{createTime}
+        score = #{score}, score_note = #{scoreNote}
         where id = #{id}
     </update>
 

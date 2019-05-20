@@ -13,6 +13,7 @@ public class Result {
     public static final int USER_IS_EXIST = 20001;
     public static final int PARAM_IS_EMPTY = 30000;
     public static final int PARAM_IS_FAIL = 30001;
+    public static final int OBJECT_IS_NULL = 40000;
 
     private String message;
     private int code;
