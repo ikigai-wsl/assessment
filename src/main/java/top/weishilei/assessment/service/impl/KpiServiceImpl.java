@@ -46,11 +46,20 @@ public class KpiServiceImpl implements KpiService {
     }
 
     @Override
-    public Kpi selectByMonthDayAndPid(String date, Integer id) {
+    public Kpi selectByYearMonthDayAndPid(String date, Integer id) {
         if (StringUtils.isBlank(date) || null == id || id < 1) {
             return null;
         }
 
-        return kpiMapper.selectByMonthDayAndPid(date, id);
+        return kpiMapper.selectByYearMonthDayAndPid(date, id);
+    }
+
+    @Override
+    public List<Kpi> selectByYearMonthAndPid(String date, Integer id) {
+        if (StringUtils.isBlank(date) || null == id || id < 1) {
+            return null;
+        }
+
+        return kpiMapper.selectByYearMonthAndPid(date, id);
     }
 }

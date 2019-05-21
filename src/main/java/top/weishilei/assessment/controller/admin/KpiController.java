@@ -60,7 +60,7 @@ public class KpiController extends BaseController {
             return Result.failCode("参数不能为空！", Result.PARAM_IS_EMPTY);
         }
 
-        boolean isExists = kpiService.selectByMonthDayAndPid(getYmd(kpi.getCreateTime()), kpi.getPid()) != null;
+        boolean isExists = kpiService.selectByYearMonthDayAndPid(getYmd(kpi.getCreateTime()), kpi.getPid()) != null;
         if (isExists) {
             return Result.fail("当前日期已存在数据！");
         }
@@ -97,7 +97,7 @@ public class KpiController extends BaseController {
             return Result.failCode("参数不能为空！", Result.PARAM_IS_EMPTY);
         }
 
-        Kpi kpi = kpiService.selectByMonthDayAndPid(getYmd(date), id);
+        Kpi kpi = kpiService.selectByYearMonthDayAndPid(getYmd(date), id);
         if (null == kpi) {
             return Result.failCode("当前日期不存在绩效数据！", Result.OBJECT_IS_NULL);
         }
@@ -106,8 +106,12 @@ public class KpiController extends BaseController {
     }
 
     @GetMapping("/view")
-    public ModelAndView viewKpi() {
+    public ModelAndView viewKpi(Integer id, String name) {
         ModelAndView modelAndView = new ModelAndView("admin/kpi/viewKpi");
+        Kpi kpi = kpiService.selectByYearMonthDayAndPid(getYmd(new Date()), id);
+        modelAndView.addObject("nowKpi", kpi);
+        modelAndView.addObject("id", id);
+        modelAndView.addObject("name", name);
 
         return modelAndView;
     }

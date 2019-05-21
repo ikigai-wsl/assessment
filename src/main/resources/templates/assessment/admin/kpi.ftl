@@ -68,7 +68,7 @@
                                                             <a href="#" class="btn btn-info btn-xs" onclick="updateKpi(${user['id']}, '${user['name']}')">
                                                                 <i class="fa fa-trash-o"></i>修改绩效
                                                             </a>
-                                                            <a href="#" class="btn btn-primary btn-xs">
+                                                            <a href="#" class="btn btn-primary btn-xs" onclick="viewKpi(${user['id']}, '${user['name']}')">
                                                                 <i class="fa fa-trash-o"></i>查看绩效
                                                             </a>
                                                         </td>
@@ -94,7 +94,7 @@
                                                                 <a href="#" class="btn btn-info btn-xs" onclick="updateKpi(${u['id']}, '${u['name']}')">
                                                                     <i class="fa fa-trash-o"></i>修改绩效
                                                                 </a>
-                                                                <a href="#" class="btn btn-primary btn-xs">
+                                                                <a href="#" class="btn btn-primary btn-xs" onclick="viewKpi(${u['id']}, '${u['name']}')">
                                                                     <i class="fa fa-trash-o"></i>查看绩效
                                                                 </a>
                                                             </td>

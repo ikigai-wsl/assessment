@@ -36,6 +36,13 @@ public interface KpiService {
      * @param id
      * @return
      */
-    Kpi selectByMonthDayAndPid(String date, Integer id);
+    Kpi selectByYearMonthDayAndPid(String date, Integer id);
 
+    /**
+     * 根据年月和id查询
+     * @param date
+     * @param id
+     * @return
+     */
+    List<Kpi> selectByYearMonthAndPid(String date, Integer id);
 }

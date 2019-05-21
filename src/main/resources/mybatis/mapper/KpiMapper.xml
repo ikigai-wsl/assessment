@@ -37,9 +37,15 @@
          from kpi where pid = #{id}
     </select>
 
-    <select id="selectByMonthDayAndPid" resultMap="BaseResultMap">
+    <select id="selectByYearMonthDayAndPid" resultMap="BaseResultMap">
         select
         <include refid="BaseColumnList"></include>
         from kpi where pid = #{id} and concat(year(create_time), month(create_time), day(create_time)) = #{date}
+    </select>
+
+    <select id="selectByYearMonthAndPid" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumnList"></include>
+        from kpi where pid = #{id} and concat(year(create_time), month(create_time)) = #{date}
     </select>
 </mapper>

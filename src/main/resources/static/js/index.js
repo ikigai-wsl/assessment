@@ -49,3 +49,12 @@ function updateKpi(id, name) {
         content: '/admin/kpi/update?id=' + id + "&name=" + name
     });
 }
+
+function viewKpi(id, name) {
+    layer.open({
+        title: '查看绩效',
+        area: ['95%', '95%'],
+        type: 2,
+        content: '/admin/kpi/view?id=' + id + "&name=" + name
+    });
+}

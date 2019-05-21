@@ -39,5 +39,13 @@ public interface KpiMapper {
      * @param id
      * @return
      */
-    Kpi selectByMonthDayAndPid(@Param("date") String date, @Param("id") Integer id);
+    Kpi selectByYearMonthDayAndPid(@Param("date") String date, @Param("id") Integer id);
+
+    /**
+     * 根据年月和id查询
+     * @param date
+     * @param id
+     * @return
+     */
+    List<Kpi> selectByYearMonthAndPid(@Param("date") String date, @Param("id") Integer id);
 }

@@ -11,7 +11,6 @@ import top.weishilei.assessment.controller.BaseController;
 import top.weishilei.assessment.domain.Result;
 import top.weishilei.assessment.domain.User;
 import top.weishilei.assessment.service.UserService;
-import top.weishilei.assessment.service.impl.UserServiceImpl;
 
 /**
  * 登录Controller
