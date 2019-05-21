@@ -46,6 +46,6 @@
     <select id="selectByYearMonthAndPid" resultMap="BaseResultMap">
         select
         <include refid="BaseColumnList"></include>
-        from kpi where pid = #{id} and concat(year(create_time), month(create_time)) = #{date}
+        from kpi where pid = #{id} and concat(year(create_time), month(create_time)) = #{date} order by create_time desc
     </select>
 </mapper>

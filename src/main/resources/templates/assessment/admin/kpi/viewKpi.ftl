@@ -13,7 +13,7 @@
         <div class="col-md-12">
             <div class="widget">
                 <div class="widget-header">
-                    <span class="widget-caption">绩效查看</span>
+                    <span class="widget-caption">${name} 绩效</span>
                 </div>
                 <div style="margin-top: 20px;">
                     <div class="well with-header  with-footer">
@@ -29,7 +29,7 @@
                                 <td>
                                    创建日期
                                 </td>
-                                <td>
+                                <td id="createTime">
                                     ${nowKpi['createTime']?string('yyyy.MM.dd HH:mm')}
                                 </td>
                             </tr>
@@ -37,7 +37,7 @@
                                 <td>
                                     任务概述
                                 </td>
-                                <td>
+                                <td id="overview">
                                     ${nowKpi['overview']}
                                 </td>
                             </tr>
@@ -45,7 +45,7 @@
                                 <td>
                                     任务完成率得分
                                 </td>
-                                <td>
+                                <td id="completion">
                                     ${nowKpi['completion']}
                                 </td>
                             </tr>
@@ -53,7 +53,7 @@
                                 <td>
                                     任务概述备注
                                 </td>
-                                <td>
+                                <td id="completionNote">
                                     ${nowKpi['completionNote']}
                                 </td>
                             </tr>
@@ -61,7 +61,7 @@
                                 <td>
                                     任务完成质量得分
                                 </td>
-                                <td>
+                                <td id="score">
                                     ${nowKpi['score']}
                                 </td>
                             </tr>
@@ -69,7 +69,7 @@
                                 <td>
                                     任务完成质量得分备注
                                 </td>
-                                <td>
+                                <td id="scoreNote">
                                     ${nowKpi['scoreNote']}
                                 </td>
                             </tr>
@@ -90,11 +90,12 @@
                 </div>
 
                 <div class="widget-body">
-                    <div class="registerbox-textbox">
+                    <div class="registerbox-textbox" style="margin-bottom: 20px;">
                         <input type="text" class="form-control" id="date" data-options="{'type':'YYYY-MM','beginYear':2019,'endYear':2088}" placeholder="请选择需要查询的日期"/>
                     </div>
-
-                    <div id="box" style="height: 350px;"></div>
+                    <div id="box" style="height: 500px;"></div>
+                    <input id="viewKpi" value="" hidden/>
+                    <input id="id" value="${id}" hidden />
                 </div>
             </div>
 
@@ -108,81 +109,9 @@
 <script src="/static/js/toastr.js"></script>
 <script src="/static/js/utils.js"></script>
 <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.common.js"></script>
+<script src="/static/js/viewKpi.js"></script>
 <script>
     $.date('#date');
-
-    var myChart = echarts.init(document.getElementById("box"));
-
-    // option 里面的内容基本涵盖你要画的图表的所有内容
-    var option = {
-        backgroundColor: '#FBFBFB',
-        tooltip : {
-            trigger: 'axis'
-        },
-        legend: {
-            data:['任务完成率得分','任务完成质量得分']
-        },
-
-        calculable : true,
-
-
-        xAxis : [
-            {
-                axisLabel:{
-                    rotate: 30,
-                    interval:0
-                },
-                axisLine:{
-                    lineStyle :{
-                        color: '#CECECE'
-                    }
-                },
-                type : 'category',
-                boundaryGap : false,
-                data : function (){
-                    var list = [];
-                    for (var i = 10; i <= 18; i++) {
-                        if(i<= 12){
-                            list.push('2016-'+i + '-01');
-                        }else{
-                            list.push('2017-'+(i-12) + '-01');
-                        }
-                    }
-                    return list;
-                }()
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value',
-                axisLine:{
-                    lineStyle :{
-                        color: '#CECECE'
-                    }
-                }
-            }
-        ],
-        series : [
-            {
-                name:'充值',
-                type:'line',
-                symbol:'none',
-                smooth: 0.2,
-                color:['#66AEDE'],
-                data:[800, 300, 500, 800, 300, 600,500,600]
-            },
-            {
-                name:'消费',
-                type:'line',
-                symbol:'none',
-                smooth: 0.2,
-                color:['#90EC7D'],
-                data:[600, 300, 400, 200, 300, 300,200,400]
-            }
-        ]
-    };
-
-    myChart.setOption(option);
 </script>
 </body>
 </html>

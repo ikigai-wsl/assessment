@@ -474,9 +474,16 @@
 		}
         createDate.show(false);
         createDate.toNow(true);
+
         var change = $("#changeDate");
         if (change.length > 0) {
             changeDate();
         }
+
+        var view = $("#viewKpi");
+        if (view.length > 0) {
+            viewKpi();
+        }
+
     })
 }))
