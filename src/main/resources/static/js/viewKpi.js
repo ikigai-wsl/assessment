@@ -121,3 +121,14 @@ function viewKpi() {
 
     getKpiData(new Date(date));
 }
+myChart.getZr().on('click',function (params) {
+    var pointInPixel= [params.offsetX, params.offsetY];
+    if (myChart.containPixel('grid',pointInPixel)) {
+        var pointInGrid=myChart.convertFromPixel({seriesIndex:0},pointInPixel);
+        var xIndex=pointInGrid[0];
+        var op=myChart.getOption();
+        var month=op.xAxis[0].data[xIndex];
+        console.log(month)
+
+    }
+});
