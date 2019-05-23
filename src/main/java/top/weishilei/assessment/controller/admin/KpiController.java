@@ -16,6 +16,7 @@ import top.weishilei.assessment.domain.User;
 import top.weishilei.assessment.service.KpiService;
 import top.weishilei.assessment.service.UserService;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 /**
@@ -97,7 +98,7 @@ public class KpiController extends BaseController {
 
         Kpi kpi = kpiService.selectByYearMonthDayAndPid(getYmd(date, false), id);
         if (null == kpi) {
-            return Result.failCode("当前日期不存在绩效数据！", Result.OBJECT_IS_NULL);
+            return Result.failCode("当前日期不存在数据！", Result.OBJECT_IS_NULL);
         }
 
         return Result.success(kpi);
@@ -115,6 +116,28 @@ public class KpiController extends BaseController {
     }
 
     @ResponseBody
+    @PostMapping("/saveOverview")
+    public String saveOverview(Integer id, String overview){
+        if (null == id || id < 0 || StringUtils.isBlank(overview)) {
+            return Result.failCode("参数有误！", Result.PARAM_IS_EMPTY);
+        }
+
+        String date = getYmd(new Date(), false);
+        Kpi kpi = kpiService.selectByYearMonthDayAndPid(date, id);
+        boolean isSuccess = false;
+        if (null == kpi) {
+            kpi = new Kpi();
+            kpi.setOverview(overview);
+            kpi.setPid(id);
+            isSuccess = kpiService.insert(kpi) > 0;
+        } else {
+            isSuccess = kpiService.updateOverview(date, overview) > 0;
+        }
+
+        return isSuccess ? Result.success() : Result.fail();
+    }
+
+    @ResponseBody
     @GetMapping("/viewMonth")
     public String viewMonth(Date date, Integer id) {
         if (null == id || id < 0) {
@@ -126,11 +149,21 @@ public class KpiController extends BaseController {
             return Result.fail();
         }
 
+        Integer total = kpiList.size() * 2;
+        double realTotal = 0;
+        for (Kpi kpi : kpiList) {
+            realTotal += kpi.getScore() + kpi.getCompletion();
+        }
+
+        DecimalFormat df = new DecimalFormat("#.00");
+        String result = df.format(realTotal / total * 60);
+
         JSONObject jsonObject = new JSONObject();
         List<String> idList = new ArrayList<>();
         List<String> dateList = new ArrayList<>();
         List<String> scoreList = new ArrayList<>();
         List<String> completionList = new ArrayList<>();
+        jsonObject.put("result", result);
         jsonObject.put("idList", idList);
         jsonObject.put("dateList", dateList);
         jsonObject.put("scoreList", scoreList);

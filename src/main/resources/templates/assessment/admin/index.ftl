@@ -23,11 +23,11 @@
                             <div class="widget-body">
                                 <div class="table-toolbar">
                                     <#if loginUser['role'] == 0>
-                                        <a id="editabledatatable_new" onclick="user_commont(-1)" class="btn btn-default">
+                                        <a onclick="user_commont(-1)" class="btn btn-default">
                                             新增用户
                                         </a>
                                     </#if>
-                                    <a id="editabledatatable_new" class="btn btn-default" onclick="user(${loginUser['id']})">
+                                    <a class="btn btn-default" onclick="user(${loginUser['id']})">
                                         个人资料
                                     </a>
                                 </div>
@@ -69,8 +69,10 @@
                                                 </td>
                                                 <td>${user['createTime']?string('yyyy.MM.dd HH:mm')}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-info btn-xs edit" onclick="user_commont(${user['id']})"><i class="fa fa-edit"></i> 修改用户</a>
-                                                    <a href="javascript:if (confirm('确定删除此用户？')) {window.location.href = '/admin/user/delete?id=' + ${user['id']}}" class="btn btn-danger btn-xs delete"><i class="fa fa-trash-o"></i> 删除用户</a>
+                                                    <#if loginUser['role'] == 0>
+                                                        <a href="#" class="btn btn-info btn-xs edit" onclick="user_commont(${user['id']})"><i class="fa fa-edit"></i> 修改用户</a>
+                                                        <a href="javascript:if (confirm('确定删除此用户？')) {window.location.href = '/admin/user/delete?id=' + ${user['id']}}" class="btn btn-danger btn-xs delete"><i class="fa fa-trash-o"></i> 删除用户</a>
+                                                    </#if>
                                                 </td>
                                             </tr>
                                         </#if>

@@ -162,7 +162,11 @@ public class UserServiceImpl implements UserService {
             userVo.setpName("无");
         } else {
             User pUser = selectById(user.getPid());
-            userVo.setpName(pUser.getName());
+            if (null == pUser) {
+                userVo.setpName("无");
+            } else {
+                userVo.setpName(pUser.getName());
+            }
         }
     }
 }

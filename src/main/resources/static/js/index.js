@@ -58,3 +58,36 @@ function viewKpi(id, name) {
         content: '/admin/kpi/view?id=' + id + "&name=" + name
     });
 }
+
+function saveOverview() {
+    if ('hidden' == $("#overview").attr('hidden')) {
+        $("#overview").removeAttr('hidden');
+    } else {
+        $("#overview").attr('hidden', 'hidden');
+    }
+}
+
+function saveOverView(id) {
+    // var overviewNote = $("#overviewNote").val();
+    // if (isEmpty(overviewNote)) {
+    //     Notify('任务概述不能为空！', 'top-right', '5000', 'danger', 'fa-bolt', true);
+    //     return;
+    // }
+    //
+    // $.ajax({
+    //     url : '/admin/kpi/saveOverview',
+    //     data : {'id' : id, 'overview' : overviewNote},
+    //     type : 'POST',
+    //     dataType : 'JSON',
+    //     success : function (response) {
+    //         var code = response['code'];
+    //         if (code != 0) {
+    //             var message = response['message'];
+    //             Notify(message, 'top-right', '5000', 'danger', 'fa-bolt', true);
+    //             return;
+    //         }
+    //
+    //         window.parent.location.reload();
+    //     }
+    // })
+}

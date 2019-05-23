@@ -23,15 +23,15 @@ public class AdminController extends BaseController {
 
     @GetMapping("/index")
     public ModelAndView showIndex() {
-        ModelAndView modelAndView = new ModelAndView("admin/index");
-        List<User> userList = null;
         Integer role = getLoginUser().getRole();
-        if (role == 0) {
-            userList = userService.select();
-        } else {
-            Integer id = getLoginUser().getId();
-            userList = userService.selectByPid(id);
+        String page = "admin/index";
+        if (1 == role) {
+            page = "redirect:/admin/group";
+        } else if (2 == role) {
+            page = "redirect:/admin/kpi";
         }
+        ModelAndView modelAndView = new ModelAndView(page);
+        List<User> userList = userService.select();
         modelAndView.addObject("userList", userList);
         modelAndView.addObject("active", 1);
 

@@ -28,10 +28,12 @@
                                                 <div class="header bg-palegreen">
                                                     ${user['name']} 的小组
                                                 </div>
-                                                <a class="btn btn-default" style="margin-bottom: 10px;"
-                                                   onclick="addGroup(${user['id']}, '${user['name']}')">
-                                                    添加小组成员
-                                                </a>
+                                                <#if loginUser['role'] == 0 || user['id'] == loginUser['id']>
+                                                    <a class="btn btn-default" style="margin-bottom: 10px;"
+                                                       onclick="addGroup(${user['id']}, '${user['name']}')">
+                                                        添加小组成员
+                                                    </a>
+                                                </#if>
                                                 <table class="table table-bordered table-hover">
                                                     <thead>
                                                     <tr>
@@ -61,9 +63,15 @@
                                                                 ${u['createTime']?string('yyyy.MM.dd HH:mm')}
                                                             </td>
                                                             <td>
-                                                                <a href="javascript:if (confirm('确定将此用户移除小组？')) {window.location.href = '/admin/group/removeGroup?id=${u['id']}'}" class="btn btn-danger btn-xs delete">
-                                                                    <i class="fa fa-trash-o"></i>移除小组
-                                                                </a>
+                                                               <#if loginUser['role'] == 0 || user['id'] == loginUser['id']>
+                                                                   <a href="javascript:if (confirm('确定将此用户移除小组？')) {window.location.href = '/admin/group/removeGroup?id=${u['id']}'}" class="btn btn-danger btn-xs delete">
+                                                                       <i class="fa fa-trash-o"></i>移除小组
+                                                                   </a>
+                                                                   <#else >
+                                                                       <a class="btn btn-default btn-xs disabled">
+                                                                           <i class="fa fa-trash-o"></i>移除小组
+                                                                       </a>
+                                                               </#if>
                                                             </td>
                                                         </tr>
                                                     </#list>

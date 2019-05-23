@@ -31,6 +31,12 @@
         where id = #{id}
     </update>
 
+    <update id="updateOverview">
+        update kpi set
+        overview = #{ovewview}
+        where concat(year(create_time), month(create_time), day(create_time)) = #{date}
+    </update>
+
     <select id="selectByPid" resultMap="BaseResultMap">
         select
         <include refid="BaseColumnList"></include>
@@ -46,6 +52,6 @@
     <select id="selectByYearMonthAndPid" resultMap="BaseResultMap">
         select
         <include refid="BaseColumnList"></include>
-        from kpi where pid = #{id} and concat(year(create_time), month(create_time)) = #{date} order by create_time desc
+        from kpi where pid = #{id} and concat(year(create_time), month(create_time)) = #{date} order by create_time
     </select>
 </mapper>

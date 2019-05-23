@@ -91,7 +91,9 @@
 
                 <div class="widget-body">
                     <div class="registerbox-textbox" style="margin-bottom: 20px;">
-                        <input type="text" class="form-control" id="date" data-options="{'type':'YYYY-MM','beginYear':2019,'endYear':2088}" placeholder="请选择需要查询的日期"/>
+                        <p style="width: 210px; margin: auto; margin-bottom: 10px;">截至目前为止本月绩效为：<span id="result" style="font-weight: 900">0</span></p>
+                        <input type="text" class="form-control"  id="date" data-options="{'type':'YYYY-MM','beginYear':2019,'endYear':2088}" placeholder="请选择需要查询的日期"/>
+
                     </div>
                     <div id="box" style="height: 500px;"></div>
                     <input id="viewKpi" value="" hidden/>

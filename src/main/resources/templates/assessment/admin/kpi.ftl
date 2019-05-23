@@ -5,6 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/static/css/beyond.min.css" rel="stylesheet"/>
+    <style>
+    </style>
 </head>
 <body>
 
@@ -21,6 +23,24 @@
                                 <span class="widget-caption">绩效管理</span>
                             </div>
                             <div class="widget-body">
+                                <#if loginUser['role'] != 0>
+                                    <div style="margin-bottom: 20px;">
+                                        <a class="btn btn-default" onclick="saveOverview()">
+                                            添加任务概述
+                                        </a>
+                                        <a class="btn btn-default" onclick="user(${loginUser['id']})">
+                                            个人资料
+                                        </a>
+                                        <div id="overview" class="registerbox bg-white" style="width: 250px; margin: 20px 0 0 0" hidden>
+                                            <div class="registerbox-textbox">
+                                                <textarea id="overviewNote" style="width: 100%; height: 100px; resize: none;" placeholder="任务概述备注" maxlength="200"></textarea>
+                                            </div>
+                                            <div class="registerbox-submit" style="margin-bottom: 40px;">
+                                                <input type="button" class="btn btn-primary pull-right" value="保存" onclick="saveOverView(${loginUser['id']})">
+                                            </div>
+                                        </div>
+                                </div>
+                                </#if>
                                 <div class="row">
                                     <#list userList as user>
                                         <div class="col-md-12">
@@ -62,12 +82,24 @@
                                                             ${user['createTime']?string('yyyy.MM.dd HH:mm')}
                                                         </td>
                                                         <td>
-                                                            <a href="#" class="btn btn-success btn-xs" onclick="addKpi(${user['id']}, '${user['name']}')">
-                                                                <i class="fa fa-trash-o"></i>添加绩效
-                                                            </a>
-                                                            <a href="#" class="btn btn-info btn-xs" onclick="updateKpi(${user['id']}, '${user['name']}')">
-                                                                <i class="fa fa-trash-o"></i>修改绩效
-                                                            </a>
+                                                            <#if loginUser['role'] == 0 || user['id'] == loginUser['id']>
+                                                                <a href="#" class="btn btn-success btn-xs" onclick="addKpi(${user['id']}, '${user['name']}')">
+                                                                    <i class="fa fa-trash-o"></i>添加绩效
+                                                                </a>
+                                                                <#else >
+                                                                    <a class="btn btn-default btn-xs disabled">
+                                                                        <i class="fa fa-trash-o"></i>添加绩效
+                                                                    </a>
+                                                            </#if>
+                                                            <#if loginUser['role'] == 0>
+                                                                <a href="#" class="btn btn-info btn-xs" onclick="updateKpi(${user['id']}, '${user['name']}')">
+                                                                    <i class="fa fa-trash-o"></i>修改绩效
+                                                                </a>
+                                                                <#else >
+                                                                    <a class="btn btn-default btn-xs disabled">
+                                                                        <i class="fa fa-trash-o"></i>修改绩效
+                                                                    </a>
+                                                            </#if>
                                                             <a href="#" class="btn btn-primary btn-xs" onclick="viewKpi(${user['id']}, '${user['name']}')">
                                                                 <i class="fa fa-trash-o"></i>查看绩效
                                                             </a>
@@ -88,12 +120,24 @@
                                                                 ${u['createTime']?string('yyyy.MM.dd HH:mm')}
                                                             </td>
                                                             <td>
-                                                                <a href="#" class="btn btn-success btn-xs" onclick="addKpi(${u['id']}, '${u['name']}')">
-                                                                    <i class="fa fa-trash-o"></i>添加绩效
-                                                                </a>
-                                                                <a href="#" class="btn btn-info btn-xs" onclick="updateKpi(${u['id']}, '${u['name']}')">
-                                                                    <i class="fa fa-trash-o"></i>修改绩效
-                                                                </a>
+                                                                <#if loginUser['role'] == 0 || user['id'] == loginUser['id']>
+                                                                    <a href="#" class="btn btn-success btn-xs" onclick="addKpi(${u['id']}, '${u['name']}')">
+                                                                        <i class="fa fa-trash-o"></i>添加绩效
+                                                                    </a>
+                                                                    <#else >
+                                                                        <a class="btn btn-default btn-xs disabled">
+                                                                            <i class="fa fa-trash-o"></i>添加绩效
+                                                                        </a>
+                                                                </#if>
+                                                                <#if loginUser['role'] == 0>
+                                                                    <a href="#" class="btn btn-info btn-xs" onclick="updateKpi(${u['id']}, '${u['name']}')">
+                                                                        <i class="fa fa-trash-o"></i>修改绩效
+                                                                    </a>
+                                                                    <#else >
+                                                                        <a class="btn btn-default btn-xs disabled">
+                                                                            <i class="fa fa-trash-o"></i>修改绩效
+                                                                        </a>
+                                                                </#if>
                                                                 <a href="#" class="btn btn-primary btn-xs" onclick="viewKpi(${u['id']}, '${u['name']}')">
                                                                     <i class="fa fa-trash-o"></i>查看绩效
                                                                 </a>

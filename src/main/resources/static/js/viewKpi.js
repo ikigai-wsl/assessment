@@ -1,6 +1,5 @@
 var myChart = echarts.init(document.getElementById("box"));
 
-// option 里面的内容基本涵盖你要画的图表的所有内容
 var option = {
     backgroundColor: '#FBFBFB',
     tooltip : {
@@ -75,7 +74,7 @@ function getKpiData(date) {
                 Notify('当月没有数据！', 'top-right', '5000', 'danger', 'fa-bolt', true);
                 myChart.setOption({
                     title : [{
-                        left : '35%',
+                        left : '32%',
                         text : date.getFullYear() + '.' + (date.getMonth() + 1) + '月无数据',
                     }],
                     xAxis : [{
@@ -91,21 +90,24 @@ function getKpiData(date) {
             }
 
             var data  = response['data'];
+            $("#result").text(data['result']);
+            var idList = data['idList'];
             var dateList = data['dateList'];
             var scoreList = data['scoreList'];
             var completionList = data['completionList'];
             myChart.setOption({
                 title : [{
-                    left : '33%',
+                    left : '32%',
                     text : date.getFullYear() + '.' + (date.getMonth() + 1) + ' 月绩效数据',
                 }],
                 xAxis : [{
                     data : dateList
                 }],
-                series : [{
-                    data : scoreList
-                }, {
-                    data : completionList
+                series : [
+                    {
+                        data : scoreList
+                    }, {
+                        data : completionList
                 }]
             })
         }
@@ -121,14 +123,14 @@ function viewKpi() {
 
     getKpiData(new Date(date));
 }
+
 myChart.getZr().on('click',function (params) {
     var pointInPixel= [params.offsetX, params.offsetY];
     if (myChart.containPixel('grid',pointInPixel)) {
-        var pointInGrid=myChart.convertFromPixel({seriesIndex:0},pointInPixel);
-        var xIndex=pointInGrid[0];
-        var op=myChart.getOption();
-        var month=op.xAxis[0].data[xIndex];
-        console.log(month)
-
+        var pointInGrid = myChart.convertFromPixel({seriesIndex:0},pointInPixel);
+        var xIndex = pointInGrid[0];
+        var op = myChart.getOption();
+        console.log(op.xAxis[0])
+        var month = op.xAxis[0].data[xIndex];
     }
 });
