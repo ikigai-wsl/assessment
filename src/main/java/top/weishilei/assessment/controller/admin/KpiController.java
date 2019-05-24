@@ -1,5 +1,6 @@
 package top.weishilei.assessment.controller.admin;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import top.weishilei.assessment.controller.BaseController;
 import top.weishilei.assessment.domain.Kpi;
+import top.weishilei.assessment.domain.Overview;
 import top.weishilei.assessment.domain.Result;
 import top.weishilei.assessment.domain.User;
 import top.weishilei.assessment.service.KpiService;
+import top.weishilei.assessment.service.OverviewService;
 import top.weishilei.assessment.service.UserService;
 
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 绩效Controller
@@ -30,6 +36,8 @@ public class KpiController extends BaseController {
     private UserService userService;
     @Autowired
     private KpiService kpiService;
+    @Autowired
+    private OverviewService overviewService;
 
     @GetMapping
     public ModelAndView showKpi() {
@@ -39,6 +47,12 @@ public class KpiController extends BaseController {
         modelAndView.addObject("userMap", userMap);
         modelAndView.addObject("userList", userList);
         modelAndView.addObject("active", 3);
+        if (getLoginUser().getRole() != 0) {
+            Overview overview = overviewService.selectByPidAndYearMonthDay(getLoginUser().getId(), getYmd(new Date(), false));
+            if (overview != null) {
+                modelAndView.addObject("overview", overview);
+            }
+        }
 
         return modelAndView;
     }
@@ -46,8 +60,12 @@ public class KpiController extends BaseController {
     @GetMapping("/add")
     public ModelAndView showAddKpi(Integer id, String name) {
         ModelAndView modelAndView = new ModelAndView(("admin/kpi/addKpi"));
+        Overview overview = overviewService.selectByPidAndYearMonthDay(id, getYmd(new Date(), false));
         modelAndView.addObject("id", id);
         modelAndView.addObject("name", name);
+        if (null != overview) {
+            modelAndView.addObject("overview", overview);
+        }
 
         return modelAndView;
     }
@@ -100,41 +118,24 @@ public class KpiController extends BaseController {
         if (null == kpi) {
             return Result.failCode("当前日期不存在数据！", Result.OBJECT_IS_NULL);
         }
+        Overview overview = overviewService.selectByPidAndYearMonthDay(id, getYmd(date, false));
+        JSONObject jsonObject = (JSONObject) JSONObject.toJSON(kpi);
+        jsonObject.put("overview", overview.getOverview());
 
-        return Result.success(kpi);
+        return Result.success(jsonObject);
     }
 
     @GetMapping("/view")
     public ModelAndView viewKpi(Integer id, String name) {
         ModelAndView modelAndView = new ModelAndView("admin/kpi/viewKpi");
         Kpi kpi = kpiService.selectByYearMonthDayAndPid(getYmd(new Date(), false), id);
+        Overview overview = overviewService.selectByPidAndYearMonthDay(id, getYmd(new Date(), false));
         modelAndView.addObject("nowKpi", kpi);
+        modelAndView.addObject("overview", overview);
         modelAndView.addObject("id", id);
         modelAndView.addObject("name", name);
 
         return modelAndView;
-    }
-
-    @ResponseBody
-    @PostMapping("/saveOverview")
-    public String saveOverview(Integer id, String overview){
-        if (null == id || id < 0 || StringUtils.isBlank(overview)) {
-            return Result.failCode("参数有误！", Result.PARAM_IS_EMPTY);
-        }
-
-        String date = getYmd(new Date(), false);
-        Kpi kpi = kpiService.selectByYearMonthDayAndPid(date, id);
-        boolean isSuccess = false;
-        if (null == kpi) {
-            kpi = new Kpi();
-            kpi.setOverview(overview);
-            kpi.setPid(id);
-            isSuccess = kpiService.insert(kpi) > 0;
-        } else {
-            isSuccess = kpiService.updateOverview(date, overview) > 0;
-        }
-
-        return isSuccess ? Result.success() : Result.fail();
     }
 
     @ResponseBody
@@ -179,39 +180,13 @@ public class KpiController extends BaseController {
     }
 
     private boolean verifyIsRight(Kpi kpi) {
-        String overview = kpi.getOverview();
         String completionNote = kpi.getCompletionNote();
         String scoreNote = kpi.getScoreNote();
-        if (StringUtils.isBlank(overview) || StringUtils.isBlank(completionNote) || StringUtils.isBlank(scoreNote)) {
+        if (StringUtils.isBlank(completionNote) || StringUtils.isBlank(scoreNote)) {
             return true;
         }
 
         return false;
     }
 
-    private String getYmd(Date date, boolean isShow) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH) + 1;
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        String d = "";
-        if (isShow) {
-            d = year + "." + month + "." + day;
-        } else {
-            d = "" + year + month + day;
-        }
-
-        return d;
-    }
-
-    private String getYm(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH) + 1;
-        String d = "" + year + month;
-
-        return d;
-    }
 }

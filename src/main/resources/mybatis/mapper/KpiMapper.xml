@@ -11,7 +11,7 @@
     </resultMap>
 
     <sql id="BaseColumnList">
-        id, pid, overview, completion,
+        id, pid, completion,
         completion_note, score, score_note,
         create_time
     </sql>
@@ -19,22 +19,16 @@
     <insert id="insert" parameterType="Kpi">
         insert into
         kpi
-        (id, pid, overview, completion, completion_note, score, score_note, create_time)
+        (id, pid, completion, completion_note, score, score_note, create_time)
         values
-        (#{id}, #{pid}, #{overview}, #{completion}, #{completionNote}, #{score}, #{scoreNote}, #{createTime})
+        (#{id}, #{pid}, #{completion}, #{completionNote}, #{score}, #{scoreNote}, #{createTime})
     </insert>
 
     <update id="update" parameterType="Kpi">
         update kpi set
-        overview = #{overview}, completion = #{completion}, completion_note = #{completionNote},
+        completion = #{completion}, completion_note = #{completionNote},
         score = #{score}, score_note = #{scoreNote}
         where id = #{id}
-    </update>
-
-    <update id="updateOverview">
-        update kpi set
-        overview = #{ovewview}
-        where concat(year(create_time), month(create_time), day(create_time)) = #{date}
     </update>
 
     <select id="selectByPid" resultMap="BaseResultMap">

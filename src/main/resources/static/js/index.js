@@ -68,26 +68,27 @@ function saveOverview() {
 }
 
 function saveOverView(id) {
-    // var overviewNote = $("#overviewNote").val();
-    // if (isEmpty(overviewNote)) {
-    //     Notify('任务概述不能为空！', 'top-right', '5000', 'danger', 'fa-bolt', true);
-    //     return;
-    // }
-    //
-    // $.ajax({
-    //     url : '/admin/kpi/saveOverview',
-    //     data : {'id' : id, 'overview' : overviewNote},
-    //     type : 'POST',
-    //     dataType : 'JSON',
-    //     success : function (response) {
-    //         var code = response['code'];
-    //         if (code != 0) {
-    //             var message = response['message'];
-    //             Notify(message, 'top-right', '5000', 'danger', 'fa-bolt', true);
-    //             return;
-    //         }
-    //
-    //         window.parent.location.reload();
-    //     }
-    // })
+    var overviewNote = $("#overviewNote").val();
+    if (isEmpty(overviewNote)) {
+        Notify('任务概述不能为空！', 'top-right', '5000', 'danger', 'fa-bolt', true);
+        return;
+    }
+
+    $.ajax({
+        url : '/admin/overview/save',
+        dataType : 'JSON',
+        type : 'POST',
+        data : {'id' : id, 'overviewNote' : overviewNote},
+        success : function (response) {
+            var code = response['code'];
+            if (code != 0) {
+                var message = response['message'];
+                Notify(message, 'top-right', '5000', 'danger', 'fa-bolt', true);
+                return;
+            }
+
+            window.parent.location.reload();
+        }
+    })
+
 }

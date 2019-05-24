@@ -48,12 +48,4 @@ public interface KpiMapper {
      * @return
      */
     List<Kpi> selectByYearMonthAndPid(@Param("date") String date, @Param("id") Integer id);
-
-    /**
-     * 修改任务概述
-     * @param date
-     * @param ovewview
-     * @return
-     */
-    Integer updateOverview(@Param("date")String date, @Param("ovewview") String ovewview);
 }

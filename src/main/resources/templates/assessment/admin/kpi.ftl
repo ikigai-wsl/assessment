@@ -33,7 +33,7 @@
                                         </a>
                                         <div id="overview" class="registerbox bg-white" style="width: 250px; margin: 20px 0 0 0" hidden>
                                             <div class="registerbox-textbox">
-                                                <textarea id="overviewNote" style="width: 100%; height: 100px; resize: none;" placeholder="任务概述备注" maxlength="200"></textarea>
+                                                <textarea id="overviewNote" style="width: 100%; height: 100px; resize: none;" placeholder="任务概述备注" maxlength="200">${(overview['overview'])!''}</textarea>
                                             </div>
                                             <div class="registerbox-submit" style="margin-bottom: 40px;">
                                                 <input type="button" class="btn btn-primary pull-right" value="保存" onclick="saveOverView(${loginUser['id']})">
@@ -82,7 +82,7 @@
                                                             ${user['createTime']?string('yyyy.MM.dd HH:mm')}
                                                         </td>
                                                         <td>
-                                                            <#if loginUser['role'] == 0 || user['id'] == loginUser['id']>
+                                                            <#if loginUser['role'] == 0>
                                                                 <a href="#" class="btn btn-success btn-xs" onclick="addKpi(${user['id']}, '${user['name']}')">
                                                                     <i class="fa fa-trash-o"></i>添加绩效
                                                                 </a>

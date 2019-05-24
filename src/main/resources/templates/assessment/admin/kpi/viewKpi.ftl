@@ -38,7 +38,7 @@
                                     任务概述
                                 </td>
                                 <td id="overview">
-                                    ${nowKpi['overview']}
+                                    ${overview['overview']}
                                 </td>
                             </tr>
                             <tr>

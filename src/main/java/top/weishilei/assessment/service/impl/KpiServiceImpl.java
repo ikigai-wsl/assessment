@@ -63,12 +63,4 @@ public class KpiServiceImpl implements KpiService {
         return kpiMapper.selectByYearMonthAndPid(date, id);
     }
 
-    @Override
-    public Integer updateOverview(String date, String ovewview) {
-        if (StringUtils.isBlank(date) || StringUtils.isBlank(ovewview)) {
-            return 0;
-        }
-
-        return kpiMapper.updateOverview(date, ovewview);
-    }
 }

@@ -16,7 +16,7 @@
             <input type="text" class="form-control" id="date" data-options="{'type':'YYYY-MM-DD','beginYear':2019,'endYear':2088}" placeholder="请选择需要查询的日期"/>
         </div>
         <div class="registerbox-textbox">
-            <textarea id="overview" style="width: 100%; height: 100px; resize: none;" placeholder="任务概述" maxlength="200" ></textarea>
+            <textarea id="overview" style="width: 100%; height: 100px; resize: none;" placeholder="任务概述" disabled ></textarea>
         </div>
         <div class="registerbox-textbox">
             任务完成率得分：

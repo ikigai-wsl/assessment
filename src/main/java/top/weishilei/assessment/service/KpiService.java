@@ -45,12 +45,4 @@ public interface KpiService {
      * @return
      */
     List<Kpi> selectByYearMonthAndPid(String date, Integer id);
-
-    /**
-     * 修改任务概述
-     * @param date
-     * @param ovewview
-     * @return
-     */
-    Integer updateOverview(String date, String ovewview);
 }

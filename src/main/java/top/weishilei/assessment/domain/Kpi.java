@@ -9,8 +9,6 @@ import java.util.Date;
 public class Kpi {
     private Integer id;
     private Integer pid;
-    // 概述
-    private String overview;
     // 完成率
     private Double completion;
     // 完成备注
@@ -35,14 +33,6 @@ public class Kpi {
 
     public void setPid(Integer pid) {
         this.pid = pid;
-    }
-
-    public String getOverview() {
-        return overview;
-    }
-
-    public void setOverview(String overview) {
-        this.overview = overview;
     }
 
     public Double getCompletion() {
@@ -90,7 +80,6 @@ public class Kpi {
         return "Kpi{" +
                 "id=" + id +
                 ", pid=" + pid +
-                ", overview='" + overview + '\'' +
                 ", completion=" + completion +
                 ", completionNote='" + completionNote + '\'' +
                 ", score=" + score +

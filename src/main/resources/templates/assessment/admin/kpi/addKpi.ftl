@@ -16,7 +16,7 @@
             <input type="text" class="form-control" id="date" data-options="{'type':'YYYY-MM-DD','beginYear':2019,'endYear':2088}" placeholder="请选择日期，为空则为当天。">
         </div>
         <div class="registerbox-textbox">
-            <textarea id="overview" style="width: 100%; height: 100px; resize: none;" placeholder="任务概述" maxlength="200" ></textarea>
+            <textarea id="overview" style="width: 100%; height: 100px; resize: none;" placeholder="任务概述" disabled></textarea>
         </div>
         <div class="registerbox-textbox">
             任务完成率得分：
@@ -46,6 +46,7 @@
         <div class="registerbox-submit">
             <input type="button" class="btn btn-primary pull-right" id="add" value="添加">
             <input id="id" value="${id}" hidden />
+            <input id="getOverview" hidden />
         </div>
     </div>
 </div>
@@ -57,6 +58,9 @@
 <script src="/static/js/kpi.js"></script>
 <script>
     $.date('#date');
+    $(function () {
+        setElementOverview(new Date());
+    })
 </script>
 </body>
 </html>

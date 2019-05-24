@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.weishilei.assessment.mapper.OverviewMapper">
+    <resultMap id="BaseResultMap" type="Overview">
+        <id column="id" property="id" jdbcType="INTEGER" javaType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="Date" />
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id, pid, overview, create_time
+    </sql>
+
+    <insert id="insert" parameterType="Overview">
+        insert into overview (id, pid, overview, create_time)
+        values (#{id}, #{pid}, #{overview}, #{createTime})
+    </insert>
+
+    <update id="update" parameterType="Overview">
+        update overview set overview = #{overview} where id = #{id}
+    </update>
+
+    <select id="selectByPidAndYearMonthDay" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumnList"></include>
+        from overview where pid = #{id} and concat(year(create_time), month(create_time), day(create_time)) = #{date}
+    </select>
+</mapper>

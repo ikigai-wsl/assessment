@@ -485,5 +485,10 @@
             viewKpi();
         }
 
+        var overview = $("#getOverview");
+        if (overview.length > 0) {
+            getOverview();
+        }
+
     })
 }))
