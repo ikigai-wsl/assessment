@@ -11,7 +11,6 @@ import top.weishilei.assessment.domain.Result;
 import top.weishilei.assessment.domain.User;
 import top.weishilei.assessment.service.UserService;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +43,6 @@ public class GroupController {
         modelAndView.addObject("userList", userList);
         modelAndView.addObject("id", id);
         modelAndView.addObject("name", name);
-
 
         return modelAndView;
     }

@@ -11,6 +11,7 @@
 	<groupId>top.weishilei</groupId>
 	<artifactId>assessment</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>assessment</name>
 	<description>Demo project for Spring Boot</description>
 
