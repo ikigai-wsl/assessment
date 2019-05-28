@@ -13,7 +13,7 @@
 
         <div class="registerbox-caption "></div>
         <div class="registerbox-textbox">
-            <input type="text" class="form-control" id="user" placeholder="用户名" maxlength="6" />
+            <input type="text" class="form-control" id="user" placeholder="用户名" />
         </div>
         <div class="registerbox-textbox">
             <input type="password" class="form-control" id="pass" placeholder="密码" maxlength="8" />

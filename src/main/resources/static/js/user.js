@@ -4,10 +4,6 @@ $("#add").click(function () {
         Notify('用户名不能为空！', 'top-right', '5000', 'danger', 'fa-bolt', true);
         return;
     }
-    if (user.length < 5) {
-        Notify('用户名长度5-6位！', 'top-right', '5000', 'danger', 'fa-bolt', true);
-        return;
-    }
     var pass = $("#pass").val();
     if (isEmpty(pass)) {
         Notify('密码不能为空！', 'top-right', '5000', 'danger', 'fa-bolt', true);
@@ -84,10 +80,6 @@ $("#editUser").click(function () {
     var user = $("#user").val();
     if (isEmpty(user)) {
         Notify('用户名不能为空！', 'top-right', '5000', 'danger', 'fa-bolt', true);
-        return;
-    }
-    if (user.length < 5) {
-        Notify('用户名长度5-6位！', 'top-right', '5000', 'danger', 'fa-bolt', true);
         return;
     }
     var pass = $("#pass").val();
