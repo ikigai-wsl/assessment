@@ -99,11 +99,11 @@ $("#editUser").click(function () {
 
     var role = $("#role").val();
     var id = $("#id").val();
-
+    var pid = $("#pid").val();
     $.ajax({
         url : '/admin/user/update',
         type : 'POST',
-        data : {'user' : user, 'pass' : pass, 'name' : name, 'role' : role, 'id' : id},
+        data : {'user' : user, 'pass' : pass, 'name' : name, 'role' : role, 'id' : id, 'pid' : pid},
         dataType : 'JSON',
         success : function (response) {
             var code = response['code'];

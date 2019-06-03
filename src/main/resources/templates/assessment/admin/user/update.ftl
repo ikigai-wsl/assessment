@@ -32,6 +32,7 @@
         <hr class="wide" />
         <div class="registerbox-textbox">
             <input type="text" id="id" value="${userUpdate['id']}" hidden />
+            <input type="text" id="pid" value="${userUpdate['pid']}" hidden />
             <input type="text" class="form-control" id="name" placeholder="姓名" maxlength="4" value="${userUpdate['name']}" />
         </div>
         <div class="registerbox-submit">

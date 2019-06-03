@@ -26,7 +26,7 @@
         </div>
         <hr class="wide" />
         <div class="registerbox-textbox">
-            <input type="password" class="form-control" id="pass" placeholder="密码" maxlength="8" />
+            <input type="password" class="form-control" id="new_pass" placeholder="密码" maxlength="8" />
             <input type="text" id="id" value="${userVo['id']}" hidden />
         </div>
         <div class="registerbox-submit">
