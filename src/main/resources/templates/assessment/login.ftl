@@ -7,6 +7,7 @@
     <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/static/layui/css/layui.css" rel="stylesheet" />
     <link href="/static/css/beyond.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="https://www.easyicon.net/download/ico/1181656/128/" />
 </head>
 <body>
 <div class="login-container animated fadeInDown">
