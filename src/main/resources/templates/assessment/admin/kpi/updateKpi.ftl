@@ -36,6 +36,7 @@
             任务完成质量得分：
             <select id="score" style="min-width: 60%;">
                 <option value="1">1</option>
+                <option value="0.8">0.8</option>
                 <option value="0.5">0.5</option>
                 <option value="0">0</option>
             </select>
