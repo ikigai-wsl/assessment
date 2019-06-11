@@ -157,6 +157,9 @@ public class KpiController extends BaseController {
 
         DecimalFormat df = new DecimalFormat("#.00");
         String result = df.format(realTotal / total * 60);
+        if (60 <= Double.valueOf(result)) {
+            result = "60";
+        }
 
         JSONObject jsonObject = new JSONObject();
         List<String> idList = new ArrayList<>();
